@@ -44,9 +44,9 @@ void MathClasses::Vector3::Normalise()
 {
 	float mag = this->Magnitude();
 	if (mag > 0) {
-		this->x /= mag;
-		this->y /= mag;
-		this->z /= mag;
+		this->x = x / mag;
+		this->y = y / mag;
+		this->z = z / mag;
 	}
 }
 
@@ -79,12 +79,20 @@ MathClasses::Vector3 MathClasses::operator-(Vector3 a, Vector3 b)
 
 MathClasses::Vector3 MathClasses::operator*(Vector3 a, float b)
 {
-	return Vector3();
+	Vector3 newVec;
+	newVec.x = a.x * b;
+	newVec.y = a.y * b;
+	newVec.z = a.z * b;
+	return newVec;
 }
 
 MathClasses::Vector3 MathClasses::operator*(float a, Vector3 b)
 {
-	return Vector3();
+	Vector3 newVec;
+	newVec.x = a * b.x;
+	newVec.y = a * b.y;
+	newVec.z = a * b.z;
+	return newVec;
 }
 
 bool MathClasses::operator==(Vector3 a, Vector3 b)
