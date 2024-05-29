@@ -25,7 +25,7 @@ MathClasses::Colour::Colour()
 
 MathClasses::Colour::Colour(Byte r, Byte g, Byte b, Byte a)
 {
-    std::uint32_t newColour;
+    std::uint32_t newColour = {0};
     newColour |= r << 24;
     newColour |= g << 16;
     newColour |= b << 8;
