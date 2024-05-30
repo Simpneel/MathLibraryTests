@@ -3,9 +3,9 @@
 
 MathClasses::Vector3::Vector3()
 {
-	x = 0;
-	y = 0;
-	z = 0;
+	x = 0.0f;
+	y = 0.0f;
+	z = 0.0f;
 }
 
 MathClasses::Vector3::Vector3(float x, float y, float z)
@@ -18,7 +18,7 @@ MathClasses::Vector3::Vector3(float x, float y, float z)
 std::string MathClasses::Vector3::ToString() const
 {
 	std::string vec3ToStr;
-	vec3ToStr = (x + ' ' + y + ' ' + z);
+	vec3ToStr = (x + ', ' + y + ', ' + z);
 	return vec3ToStr;
 }
 

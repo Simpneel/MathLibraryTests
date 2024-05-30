@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Vector3.h"
 
 namespace MathClasses
 {

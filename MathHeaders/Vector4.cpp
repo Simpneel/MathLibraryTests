@@ -2,10 +2,10 @@
 
 MathClasses::Vector4::Vector4()
 {
-	x = 0;
-	y = 0;
-	z = 0;
-	w = 0;
+	x = 0.0f;
+	y = 0.0f;
+	z = 0.0f;
+	w = 0.0f;
 }
 
 MathClasses::Vector4::Vector4(float x, float y, float z, float w)
@@ -19,7 +19,7 @@ MathClasses::Vector4::Vector4(float x, float y, float z, float w)
 std::string MathClasses::Vector4::ToString() const
 {
 	std::string vec4ToStr;
-	vec4ToStr = x + ' ' + y + ' ' + z + ' ' + w;
+	vec4ToStr = x + ', ' + y + ', ' + z + ', ' + w;
 	return vec4ToStr;
 }
 
@@ -46,7 +46,7 @@ MathClasses::Vector4 MathClasses::Vector4::Normalised() const
 void MathClasses::Vector4::Normalise()
 {
 	float mag = this->Magnitude();
-	if (mag > 0) {
+	if (mag > 0.0f) {
 		this->x = this->x / mag;
 		this->y = this->y / mag;
 		this->z = this->z / mag;
