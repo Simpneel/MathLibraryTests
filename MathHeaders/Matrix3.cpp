@@ -91,7 +91,7 @@ MathClasses::Matrix3 MathClasses::Matrix3::MakeEuler(Vector3 e)
 
 MathClasses::Matrix3 MathClasses::Matrix3::MakeScale(float x, float y)
 {
-	return Matrix3(x, 0.0f, 0.0f, 0.0f, y, 0.0f, 0.0f, 0.0f, 0.0f);
+	return Matrix3(x, 0.0f, 0.0f, 0.0f, y, 0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 MathClasses::Matrix3 MathClasses::Matrix3::MakeScale(float x, float y, float z)
@@ -116,7 +116,7 @@ MathClasses::Matrix3 MathClasses::operator*(Matrix3 a, Matrix3 b)
 		a.m2 * b.m1 + a.m5 * b.m2 + a.m8 * b.m3,
 		a.m3 * b.m1 + a.m6 * b.m2 + a.m9 * b.m3,
 
-		a.m1 * b.m4 + a.m4 * b.m5 + a.m7 + b.m6,
+		a.m1 * b.m4 + a.m4 * b.m5 + a.m7 * b.m6,
 		a.m2 * b.m4 + a.m5 * b.m5 + a.m8 * b.m6,
 		a.m3 * b.m4 + a.m6 * b.m5 + a.m9 * b.m6,
 

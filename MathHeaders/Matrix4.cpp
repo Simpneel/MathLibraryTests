@@ -200,12 +200,18 @@ MathClasses::Matrix4 MathClasses::operator*(Matrix4 a, Matrix4 b)
 
 MathClasses::Vector4 MathClasses::operator*(Matrix4 a, Vector4 b)
 {
-	return Vector4(
+	Vector4 newVec;
+	newVec.x = a.m1 * b.x + a.m5 * b.y + a.m9 * b.z + a.m13 * b.w;
+	newVec.y = a.m2 * b.x + a.m6 * b.y + a.m10 * b.z + a.m14 * b.w;
+	newVec.z = a.m3 * b.x + a.m7 * b.y + a.m11 * b.z + a.m15 * b.w;
+	newVec.w = a.m4 * b.x + a.m8 * b.y + a.m12 * b.z + a.m16 * b.w;
+	return newVec;
+	/*return Vector4(
 		a.m1 * b.x + a.m2 * b.y + a.m3 * b.z + a.m4 * b.w,
 		a.m5 * b.x + a.m6 * b.y + a.m7 * b.z + a.m8 * b.w,
 		a.m9 * b.x + a.m10 * b.y + a.m11 * b.z + a.m12 * b.w,
 		a.m13 * b.x + a.m14 * b.y + a.m15 * b.z + a.m16 * b.w  
-	);
+	);*/
 }
 
 bool MathClasses::operator==(Matrix4 a, Matrix4 b)
