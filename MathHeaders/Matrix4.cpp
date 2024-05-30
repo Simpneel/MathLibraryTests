@@ -57,8 +57,7 @@ MathClasses::Matrix4::Matrix4(float* v) {
 	this->m16 = v[15];
 }
 
-std::string MathClasses::Matrix4::ToString() const
-{
+std::string MathClasses::Matrix4::ToString() const {
 	std::string mat4ToStr;
 	mat4ToStr = m1 + ', ' + m2 + ', ' + m3 + ', ' + m4 + ', ' + m5 + ', ' + m6 + ', ' + m7 + ', ' + m8 + ', ' +
 		m9 + ', ' + m10 + ', ' + m11 + ', ' + m12 + ', ' + m13 + ', ' + m14 + ', ' + m15 + ', ' + m16;
@@ -66,8 +65,7 @@ std::string MathClasses::Matrix4::ToString() const
 }
 
 
-MathClasses::Matrix4 MathClasses::Matrix4::MakeIdentity()
-{
+MathClasses::Matrix4 MathClasses::Matrix4::MakeIdentity() {
 	return Matrix4(
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
@@ -76,3 +74,155 @@ MathClasses::Matrix4 MathClasses::Matrix4::MakeIdentity()
 	);
 }
 
+MathClasses::Matrix4 MathClasses::Matrix4::MakeTranslation(float x, float y, float z) {
+	return Matrix4(
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		x, y, z, 1.0f
+	);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeTranslation(Vector3 v) {
+	return Matrix4(
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		v.x, v.y ,v.z, 1.0f
+	);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeRotateX(float r) {
+	return Matrix4(
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, cos(r), -sin(r), 0.0f,
+		0.0f, sin(r), cos(r), 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeRotateY(float r) {
+	return Matrix4(
+		cos(r), 0.0f, sin(r), 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		-sin(r), 0.0f, cos(r), 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeRotateZ(float r) {
+	return Matrix4(
+		cos(r), sin(r), 0.0f, 0.0f,
+		-sin(r), cos(r), 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeEuler(float x, float y, float z) {
+	Matrix4 pitch = MakeRotateX(x);
+	Matrix4 yaw = MakeRotateY(y);
+	Matrix4 roll = MakeRotateZ(z);
+	return (roll * yaw * pitch);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeEuler(Vector3 e) {
+	Matrix4 pitch = MakeRotateX(e.x);
+	Matrix4 yaw = MakeRotateY(e.y);
+	Matrix4 roll = MakeRotateZ(e.z);
+	return (roll * yaw * pitch);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeScale(float x, float y) {
+	return Matrix4(
+		x, 0.0f, 0.0f, 0.0f,
+		0.0f, y, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeScale(float x, float y, float z)
+{
+	return Matrix4(
+		x, 0.0f, 0.0f, 0.0f,
+		0.0f, y, 0.0f, 0.0f,
+		0.0f, 0.0f, z, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::MakeScale(Vector3 s)
+{
+	return Matrix4(
+		s.x, 0.0f, 0.0f, 0.0f,
+		0.0f, s.y, 0.0f, 0.0f,
+		0.0f, 0.0f, s.z, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+MathClasses::Matrix4 MathClasses::Matrix4::Transposed()
+{
+	return Matrix4(
+		m1, m5, m9, m13, 
+		m2, m6, m10, m14,
+		m3, m7, m11, m15,
+		m4, m8, m12, m16
+	);
+}
+
+MathClasses::Matrix4 MathClasses::operator*(Matrix4 a, Matrix4 b)
+{
+	return Matrix4(
+		a.m1 * b.m1 + a.m5 * b.m2 + a.m9 * b.m3 + a.m13 * b.m4,
+		a.m2 * b.m1 + a.m6 * b.m2 + a.m10 * b.m3 + a.m14 * b.m4,
+		a.m3 * b.m1 + a.m7 * b.m2 + a.m11 * b.m3 + a.m15 * b.m4,
+		a.m4 * b.m1 + a.m8 * b.m2 + a.m12 * b.m3 + a.m16 * b.m4,
+
+		a.m1* b.m5 + a.m5 * b.m6 + a.m9 * b.m7 + a.m13 * b.m8,
+		a.m2* b.m5 + a.m6 * b.m6 + a.m10 * b.m7 + a.m14 * b.m8,
+		a.m3* b.m5 + a.m7 * b.m6 + a.m11 * b.m7 + a.m15 * b.m8,
+		a.m4* b.m5 + a.m8 * b.m6 + a.m12 * b.m7 + a.m16 * b.m8,
+
+		a.m1* b.m9 + a.m5 * b.m10 + a.m9 * b.m11 + a.m13 * b.m12,
+		a.m2* b.m9 + a.m6 * b.m10 + a.m10 * b.m11 + a.m14 * b.m12,
+		a.m3* b.m9 + a.m7 * b.m10 + a.m11 * b.m11 + a.m15 * b.m12,
+		a.m4* b.m9 + a.m8 * b.m10 + a.m12 * b.m11 + a.m16 * b.m12,
+
+		a.m1* b.m13 + a.m5 * b.m14 + a.m9 * b.m15 + a.m13 * b.m16,
+		a.m2* b.m13 + a.m6 * b.m14 + a.m10 * b.m15 + a.m14 * b.m16,
+		a.m3* b.m13 + a.m7 * b.m14 + a.m11 * b.m15 + a.m15 * b.m16,
+		a.m4* b.m13 + a.m8 * b.m14 + a.m12 * b.m15 + a.m16 * b.m16
+	);
+}
+
+MathClasses::Vector4 MathClasses::operator*(Matrix4 a, Vector4 b)
+{
+	return Vector4(
+		a.m1 * b.x + a.m2 * b.y + a.m3 * b.z + a.m4 * b.w,
+		a.m5 * b.x + a.m6 * b.y + a.m7 * b.z + a.m8 * b.w,
+		a.m9 * b.x + a.m10 * b.y + a.m11 * b.z + a.m12 * b.w,
+		a.m13 * b.x + a.m14 * b.y + a.m15 * b.z + a.m16 * b.w  
+	);
+}
+
+bool MathClasses::operator==(Matrix4 a, Matrix4 b)
+{
+	if (a.m1 == b.m2 && a.m2 == b.m2 && a.m3 == b.m3 && a.m4 == b.m4 && a.m5 == b.m5 && a.m6 == b.m6 && a.m7 == b.m7 && a.m8 == b.m8 && a.m9 == b.m9 && a.m10 == b.m10 && a.m11 == b.m11 && a.m12 == b.m12 && a.m13 == b.m13 && a.m14 == b.m14 && a.m15 == b.m15 && a.m16 == b.m16) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool MathClasses::operator!=(Matrix4 a, Matrix4 b)
+{
+	if (!(a.m1 == b.m2 && a.m2 == b.m2 && a.m3 == b.m3 && a.m4 == b.m4 && a.m5 == b.m5 && a.m6 == b.m6 && a.m7 == b.m7 && a.m8 == b.m8 && a.m9 == b.m9 && a.m10 == b.m10 && a.m11 == b.m11 && a.m12 == b.m12 && a.m13 == b.m13 && a.m14 == b.m14 && a.m15 == b.m15 && a.m16 == b.m16)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}

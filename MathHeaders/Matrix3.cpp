@@ -50,11 +50,11 @@ MathClasses::Matrix3 MathClasses::Matrix3::MakeIdentity() {
 }
 
 MathClasses::Matrix3 MathClasses::Matrix3::MakeTranslation(float x, float y, float z) {
-	
+	return Matrix3(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, x, y, z);
 }
 
 MathClasses::Matrix3 MathClasses::Matrix3::MakeTranslation(Vector3 v) {
-	return Matrix3();
+	return Matrix3(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, v.x, v.y, v.z);
 }
 
 MathClasses::Matrix3 MathClasses::Matrix3::MakeRotateX(float r)
@@ -114,9 +114,11 @@ MathClasses::Matrix3 MathClasses::operator*(Matrix3 a, Matrix3 b)
 		a.m1 * b.m1 + a.m4 * b.m2 + a.m7 * b.m3,
 		a.m2 * b.m1 + a.m5 * b.m2 + a.m8 * b.m3,
 		a.m3 * b.m1 + a.m6 * b.m2 + a.m9 * b.m3,
+
 		a.m1 * b.m4 + a.m4 * b.m5 + a.m7 + b.m6,
 		a.m2 * b.m4 + a.m5 * b.m5 + a.m8 * b.m6,
 		a.m3 * b.m4 + a.m6 * b.m5 + a.m9 * b.m6,
+
 		a.m1 * b.m7 + a.m4 * b.m8 + a.m7 * b.m9,
 		a.m2 * b.m7 + a.m5 * b.m8 + a.m8 * b.m9,
 		a.m3 * b.m7 + a.m6 * b.m8 + a.m9 * b.m9
