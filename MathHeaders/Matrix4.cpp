@@ -58,10 +58,11 @@ MathClasses::Matrix4::Matrix4(float* v) {
 }
 
 std::string MathClasses::Matrix4::ToString() const {
-	std::string mat4ToStr;
-	mat4ToStr = m1 + ', ' + m2 + ', ' + m3 + ', ' + m4 + ', ' + m5 + ', ' + m6 + ', ' + m7 + ', ' + m8 + ', ' +
-		m9 + ', ' + m10 + ', ' + m11 + ', ' + m12 + ', ' + m13 + ', ' + m14 + ', ' + m15 + ', ' + m16;
-	return mat4ToStr;
+	std::string newStr = std::to_string(m1) + ", " + std::to_string(m2) + ", " + std::to_string(m3) + ", " + std::to_string(m4) + ", " +
+		std::to_string(m5) + ", " + std::to_string(m6) + ", " + std::to_string(m7) + ", " + std::to_string(m8) + ", " +
+		std::to_string(m9) + ", " + std::to_string(m10) + ", " + std::to_string(m11) + ", " + std::to_string(m12) + ", " +
+		std::to_string(m13) + ", " + std::to_string(m14) + ", " + std::to_string(m15) + ", " + std::to_string(m16);
+	return newStr;
 }
 
 
@@ -209,20 +210,16 @@ MathClasses::Vector4 MathClasses::operator*(Matrix4 a, Vector4 b)
 
 bool MathClasses::operator==(Matrix4 a, Matrix4 b)
 {
-	if (a.m1 == b.m2 && a.m2 == b.m2 && a.m3 == b.m3 && a.m4 == b.m4 && a.m5 == b.m5 && a.m6 == b.m6 && a.m7 == b.m7 && a.m8 == b.m8 && a.m9 == b.m9 && a.m10 == b.m10 && a.m11 == b.m11 && a.m12 == b.m12 && a.m13 == b.m13 && a.m14 == b.m14 && a.m15 == b.m15 && a.m16 == b.m16) {
+	if (abs(a.m1 - b.m1) < 0.001 && abs(a.m2 - b.m2) < 0.001 && abs(a.m3 - b.m3) < 0.001 && abs(a.m4 - b.m4) < 0.001 && abs(a.m5 - b.m5) < 0.001 && abs(a.m7 - b.m7) < 0.001 && abs(a.m8 - b.m8) < 0.001 && abs(a.m9 - b.m9) < 0.001 && abs(a.m10 - b.m10) < 0.001 && abs(a.m11 - b.m11) < 0.001 && abs(a.m12 - b.m12) < 0.001 && abs(a.m13 - b.m13) < 0.001 && abs(a.m14 - b.m14) < 0.001 && abs(a.m15 - b.m15) < 0.001 && abs(a.m16 - b.m16) < 0.001) {
 		return true;
 	}
-	else {
-		return false;
-	}
+	else return false;
 }
 
 bool MathClasses::operator!=(Matrix4 a, Matrix4 b)
 {
-	if (!(a.m1 == b.m2 && a.m2 == b.m2 && a.m3 == b.m3 && a.m4 == b.m4 && a.m5 == b.m5 && a.m6 == b.m6 && a.m7 == b.m7 && a.m8 == b.m8 && a.m9 == b.m9 && a.m10 == b.m10 && a.m11 == b.m11 && a.m12 == b.m12 && a.m13 == b.m13 && a.m14 == b.m14 && a.m15 == b.m15 && a.m16 == b.m16)) {
+	if (!(abs(a.m1 - b.m1) < 0.001 && abs(a.m2 - b.m2) < 0.001 && abs(a.m3 - b.m3) < 0.001 && abs(a.m4 - b.m4) < 0.001 && abs(a.m5 - b.m5) < 0.001 && abs(a.m7 - b.m7) < 0.001 && abs(a.m8 - b.m8) < 0.001 && abs(a.m9 - b.m9) < 0.001 && abs(a.m10 - b.m10) < 0.001 && abs(a.m11 - b.m11) < 0.001 && abs(a.m12 - b.m12) < 0.001 && abs(a.m13 - b.m13) < 0.001 && abs(a.m14 - b.m14) < 0.001 && abs(a.m15 - b.m15) < 0.001 && abs(a.m16 - b.m16) < 0.001)) {
 		return true;
 	}
-	else {
-		return false;
-	}
+	else return false;
 }

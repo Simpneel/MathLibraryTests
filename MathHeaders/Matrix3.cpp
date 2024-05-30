@@ -137,20 +137,16 @@ MathClasses::Vector3 MathClasses::operator*(Matrix3 a, Vector3 b)
 
 bool MathClasses::operator==(Matrix3 a, Matrix3 b)
 {
-	if (a.m1 == b.m2 && a.m2 == b.m2 && a.m3 == b.m3 && a.m4 == b.m4 && a.m5 == b.m5 && a.m6 == b.m6 && a.m7 == b.m7 && a.m8 == b.m8 && a.m9 == b.m9) {
+	if (abs(a.m1 - b.m1) < 0.001 && abs(a.m2 - b.m2) < 0.001 && abs(a.m3 - b.m3) < 0.001 && abs(a.m4 - b.m4) < 0.001 && abs(a.m5 - b.m5) < 0.001 && abs(a.m7 - b.m7) < 0.001 && abs(a.m8 - b.m8) < 0.001 && abs(a.m9 - b.m9) < 0.001) {
 		return true;
 	}
-	else {
-		return false;
-	}
+	else return false;
 }
 
 bool MathClasses::operator!=(Matrix3 a, Matrix3 b)
 {
-	if (!(a.m1 == b.m2 && a.m2 == b.m2 && a.m3 == b.m3 && a.m4 == b.m4 && a.m5 == b.m5 && a.m6 == b.m6 && a.m7 == b.m7 && a.m8 == b.m8 && a.m9 == b.m9)) {
+	if (!(abs(a.m1 - b.m1) < 0.001 && abs(a.m2 - b.m2) < 0.001 && abs(a.m3 - b.m3) < 0.001 && abs(a.m4 - b.m4) < 0.001 && abs(a.m5 - b.m5) < 0.001 && abs(a.m7 - b.m7) < 0.001 && abs(a.m8 - b.m8) < 0.001 && abs(a.m9 - b.m9) < 0.001)) {
 		return true;
 	}
-	else {
-		return false;
-	}
+	else return false;
 }
