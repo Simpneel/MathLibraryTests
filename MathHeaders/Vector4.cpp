@@ -18,9 +18,7 @@ MathClasses::Vector4::Vector4(float x, float y, float z, float w)
 
 std::string MathClasses::Vector4::ToString() const
 {
-	std::string vec4ToStr;
-	vec4ToStr = x + ', ' + y + ', ' + z + ', ' + w;
-	return vec4ToStr;
+	return std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ", " + std::to_string(w);
 }
 
 float MathClasses::Vector4::Magnitude() const
@@ -37,10 +35,9 @@ float MathClasses::Vector4::Dot(Vector4 o) const
 
 MathClasses::Vector4 MathClasses::Vector4::Normalised() const
 {
-	Vector4 newVec;
-	newVec = newVec + *this;
-	newVec.Normalise();
-	return newVec;
+	Vector4 temp = *this;
+	temp.Normalise();
+	return temp;
 }
 
 void MathClasses::Vector4::Normalise()
@@ -57,10 +54,10 @@ void MathClasses::Vector4::Normalise()
 MathClasses::Vector4 MathClasses::Vector4::Cross(Vector4 o) const
 {
 	Vector4 newVec;
-	newVec.w = o.w;
 	newVec.x = ((y * o.z) - (z * o.y));
 	newVec.y = ((z * o.x) - (x * o.z));
 	newVec.z = ((x * o.y) - (y * o.x));
+	newVec.w = 0;
 	return newVec;
 }
 
@@ -106,7 +103,7 @@ MathClasses::Vector4 MathClasses::operator*(float a, Vector4 b)
 
 bool MathClasses::operator==(Vector4 a, Vector4 b)
 {
-	if ((a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w) && (a.x / b.x) == (a.y / b.y) == (a.z / b.z) == (a.w / b.w)) {
+	if (abs(a.x - b.x) < 0.001 && abs(a.y - b.y) < 0.001 && abs(a.z - b.z) < 0.001 && abs(a.w - b.w) < 0.001) {
 		return true;
 	}
 	else {
@@ -116,7 +113,7 @@ bool MathClasses::operator==(Vector4 a, Vector4 b)
 
 bool MathClasses::operator!=(Vector4 a, Vector4 b)
 {
-	if (!((a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w) && (a.x / b.x) == (a.y / b.y) == (a.z / b.z) == (a.w / b.w))) {
+	if (!(abs(a.x - b.x) < 0.001 && abs(a.y - b.y) < 0.001 && abs(a.z - b.z) < 0.001 && abs(a.w - b.w) < 0.001)) {
 		return true;
 	}
 	else {

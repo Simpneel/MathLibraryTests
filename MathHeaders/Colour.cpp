@@ -20,7 +20,7 @@ std::string MathClasses::Colour::ToString() const
 
 MathClasses::Colour::Colour()
 {
-    colour = 0;
+    this->colour = 0;
 }
 
 MathClasses::Colour::Colour(Byte r, Byte g, Byte b, Byte a)
@@ -74,10 +74,20 @@ void MathClasses::Colour::SetAlpha(Byte v)
 
 bool MathClasses::operator==(Colour a, Colour b)
 {
-    return a == b;
+    if (a.GetRed() == b.GetRed() && a.GetGreen() == b.GetGreen() && a.GetBlue() == b.GetBlue() && a.GetAlpha() == b.GetAlpha()) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 bool MathClasses::operator!=(Colour a, Colour b)
 {
-    return !(a == b);
+    if (!(a.GetRed() == b.GetRed() && a.GetGreen() == b.GetGreen() && a.GetBlue() == b.GetBlue() && a.GetAlpha() == b.GetAlpha())) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }

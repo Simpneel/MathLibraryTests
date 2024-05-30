@@ -37,10 +37,11 @@ MathClasses::Matrix3::Matrix3(float* v) {
 }
 
 std::string MathClasses::Matrix3::ToString() const {
-	std::string mat3ToStr;
-	mat3ToStr = m1 + ', ' + m2 + ', ' + m3 + ', ' + m4 + ', ' + m5 + ', ' + m6 + ', ' + m7 + ', ' + m8 + ', ' + m9;
-	return mat3ToStr;
-}
+	std::string newStr = std::to_string(m1) + ", " + std::to_string(m2) + ", " + std::to_string(m3) + ", " +
+		std::to_string(m4) + ", " + std::to_string(m5) + ", " + std::to_string(m6) + ", " +
+		std::to_string(m7) + ", " + std::to_string(m8) + ", " + std::to_string(m9);
+	return newStr;
+} 
 
 MathClasses::Matrix3 MathClasses::Matrix3::MakeIdentity() {
 	Matrix3 identityMatrix;

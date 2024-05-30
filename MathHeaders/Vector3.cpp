@@ -17,9 +17,7 @@ MathClasses::Vector3::Vector3(float x, float y, float z)
 
 std::string MathClasses::Vector3::ToString() const
 {
-	std::string vec3ToStr;
-	vec3ToStr = (x + ', ' + y + ', ' + z);
-	return vec3ToStr;
+	return std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z);
 }
 
 float MathClasses::Vector3::Magnitude() const
@@ -36,17 +34,18 @@ float MathClasses::Vector3::Dot(Vector3 o) const
 
 MathClasses::Vector3 MathClasses::Vector3::Normalised() const
 {
-	this->Normalised();
-	return *this;
+	Vector3 temp = *this;
+	temp.Normalise();
+	return temp;
 }
 
 void MathClasses::Vector3::Normalise()
 {
 	float mag = this->Magnitude();
 	if (mag > 0) {
-		this->x = x / mag;
-		this->y = y / mag;
-		this->z = z / mag;
+		this->x /= mag;
+		this->y /= mag;
+		this->z /= mag;
 	}
 }
 
@@ -62,7 +61,7 @@ MathClasses::Vector3 MathClasses::Vector3::Cross(Vector3 o) const
 MathClasses::Vector3 MathClasses::operator+(Vector3 a, Vector3 b)
 {
 	Vector3 newVec;
-	newVec.x = a.x + b.x;
+	newVec.x = a.x + b.x; 
 	newVec.y = a.y + b.y;
 	newVec.z = a.z + b.z;
 	return newVec;
@@ -97,7 +96,7 @@ MathClasses::Vector3 MathClasses::operator*(float a, Vector3 b)
 
 bool MathClasses::operator==(Vector3 a, Vector3 b)
 {
-	if ((a.x == b.x && a.y == b.y && a.z == b.z) && (a.x / b.x) == (a.y / b.y) == (a.z / b.z)) {
+	if (abs(a.x - b.x) < 0.001 && abs(a.y - b.y) < 0.001 && abs(a.z - b.z) < 0.001) {
 		return true;
 	}
 	else {
@@ -107,7 +106,7 @@ bool MathClasses::operator==(Vector3 a, Vector3 b)
 
 bool MathClasses::operator!=(Vector3 a, Vector3 b)
 {
-	if (!((a.x == b.x && a.y == b.y && a.z == b.z) && (a.x / b.x) == (a.y / b.y) == (a.z / b.z))) {
+	if (!(abs(a.x - b.x) < 0.001 && abs(a.y - b.y) < 0.001 && abs(a.z - b.z) < 0.001)) {
 		return true;
 	}
 	else {
