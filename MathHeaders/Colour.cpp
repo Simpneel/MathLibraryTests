@@ -20,31 +20,27 @@ std::string MathClasses::Colour::ToString() const
 
 MathClasses::Colour::Colour()
 {
-    this->colour = 0;
+    colour = 0xff;
 }
 
 MathClasses::Colour::Colour(Byte r, Byte g, Byte b, Byte a)
 {
-    std::uint32_t newColour = {0};
-    newColour |= r << 24;
-    newColour |= g << 16;
-    newColour |= b << 8;
-    newColour |= a;
+    colour = (r << 24) | (g << 16) | (b << 8) | (a);
 }
 
 MathClasses::Byte MathClasses::Colour::GetRed() const
 {
-    return this->colour << 24;
+    return this->colour >> 24;
 }
 
 MathClasses::Byte MathClasses::Colour::GetGreen() const
 {
-    return this->colour << 16;
+    return this->colour >> 16;
 }
 
 MathClasses::Byte MathClasses::Colour::GetBlue() const
 {
-    return this->colour << 8;
+    return this->colour >> 8;
 }
 
 MathClasses::Byte MathClasses::Colour::GetAlpha() const
@@ -54,22 +50,33 @@ MathClasses::Byte MathClasses::Colour::GetAlpha() const
 
 void MathClasses::Colour::SetRed(Byte v)
 {
-    this->colour |= v << 24;
+    colour = colour & 0x00FFFFFF;
+    unsigned int temp = v;
+    temp <<= 24;
+    colour = colour + temp;
 }
 
 void MathClasses::Colour::SetGreen(Byte v)
 {
-    this->colour |= v << 16;
+    colour = colour & 0xFF00FFFF;
+    unsigned int temp = v;
+    temp <<= 16;
+    colour += temp;
 }
 
 void MathClasses::Colour::SetBlue(Byte v)
 {
-    this->colour |= v << 8;
+    colour = colour & 0xFFFF00FF;
+    unsigned int temp = v;
+    temp <<= 8;
+    colour += temp;
 }
 
 void MathClasses::Colour::SetAlpha(Byte v)
 {
-    this->colour |= v;
+    colour &= 0xFFFFFF00;
+    unsigned int temp = v;
+    colour += temp;
 }
 
 bool MathClasses::operator==(Colour a, Colour b)
